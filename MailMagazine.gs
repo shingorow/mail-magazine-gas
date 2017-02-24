@@ -24,11 +24,11 @@
     
     for (var i = 0, length = recipients.length; i < length; i++) {
       recipient = recipients[i];
-      emailMessage = createMessage(emailTemplate, recipient);
-      sendEmail(recipient[emailLabel], emailMessage, emailConfig);
+      if (recipient[emailLabel]) {
+        emailMessage = createMessage(emailTemplate, recipient);
+        sendEmail(recipient[emailLabel], emailMessage, emailConfig);
+      }
     }
-
-    return;
 
 
     function　getValuesFromSpreadsheet(ssId, sheetName, displayValues) {
@@ -125,7 +125,7 @@
       if(emailConfig.bcc) options.bcc = emailConfig.bcc;
       if(emailConfig.from) options.from = emailConfig.from;
       if(emailMessage['本文:HTML']) options.htmlBody = emailMessage['本文:HTML'];
-      if(emailConfig.inlineImages) options.inlineImage = emailConfig.inlineImage;
+      if(emailConfig.inlineImages) options.inlineImages = emailConfig.inlineImages;
       if(emailConfig.name) options.name = emailConfig.name;
       if(emailConfig.replyTo) options.replyTo = emailConfig.replyTo;
       
